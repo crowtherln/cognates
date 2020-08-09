@@ -4,7 +4,7 @@
 """
 This program produces a csv of Proto-Indo-European roots that have
     modern descendants in both Persian and English, along with those
-    descendants. This program takes about 14 minutes to run.
+    descendants. This program takes about 10 minutes to run.
 """
 
 import requests
@@ -258,7 +258,8 @@ for persian_dict in persian_dicts:
                     "Persian URL": persian_dict["Persian URL"],
                     "English URL": english_dict["English URL"]
                     }
-                shared_roots.append(shared_root)
+                if shared_root not in shared_roots:
+                    shared_roots.append(shared_root)
         except:
             continue
 
