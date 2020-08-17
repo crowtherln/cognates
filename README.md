@@ -1,4 +1,3 @@
-#cognates
 This project scrapes Wiktionary to find cognates between different
     languages.
 
