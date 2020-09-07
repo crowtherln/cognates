@@ -281,7 +281,7 @@ Thank you. By default, the file will have the following name:
     the .csv extension in the name.)""")
 filename_response = input()
 if filename_response != "":
-    file_name = filename_response
+    filename = filename_response
 
 # Alert the user that the program may take a while and get approval to
 #   proceed.
