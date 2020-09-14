@@ -1,6 +1,8 @@
 ﻿Language 1,Language 2,Ancestor,Duration (minutes),Cognate Pairs Found
 English,German,Proto-Germanic,26,"1,377"
 Dutch,English,Proto-Germanic,18,"1,173"
+Icelandic,Norwegian Nynorsk,Old Norse,24,"1,036"
+Icelandic,Norwegian Bokmål,Old Norse,28,871
 Danish,English,Proto-Germanic,46,763
 Persian,Albanian,Proto-Indo-European,8,122
 Tibetan,Chinese,Proto-Sino-Tibetan,4,82
@@ -10,6 +12,4 @@ Kazakh,Azerbaijani,Proto-Turkic,7,20
 Persian,Punjabi,Proto-Indo-Iranian,3,15
 Tamil,Telugu,Proto-Dravidian,1,13
 Adyghe,Kabardian,Proto-Northwest Caucasian,1,0
-Icelandic,Norwegian Bokmål,Old Norse,28,871
-Icelandic,Norwegian Nynorsk,Old Norse,20,0
 Vietnamese,Khmer,Proto-Austroasiatic,1,0
