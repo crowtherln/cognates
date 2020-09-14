@@ -100,7 +100,7 @@ def get_ancestor_roots(language,
         response = requests.get(dict[language + " URL"])
         data = response.text
         soup = BeautifulSoup(data, "lxml")
-        headers = soup.select("h2 #" + language)
+        headers = soup.select("h2 #" + language.replace(" ", "_"))
         # Exclude unless there is exactly one <h2> tag for the language.
         if len(headers) != 1:
             # To help the program run faster, remove dictionaries that
@@ -174,15 +174,21 @@ def find_shared_roots(lang_1,
                 continue
 
 """
-This function prints the time elapsed since the beginning of the
-    program. Before this function is called, the variable "elapsed_time"
-    needs to be assigned."""
-def elapsed_time():
-    elapsed_time = round(time.time() - start_time)
-    if elapsed_time < 60:
-        print("Elapsed time: " + str(elapsed_time) + " seconds")
+This function assigns a string representing how much time has elapsed
+    since the beginning of the program to the global variable
+    "difference". As input, this program takes the time when the program
+    started."""
+def time_diff(time_1, time_2):
+    global difference
+    difference = abs(round(time_2 - time_1))
+    if difference == 1:
+        difference = "1 second"
+    elif difference < 60:
+        difference = str(difference) + " seconds"
+    elif round(difference/60) == 1:
+        difference = "1 minute"
     else:
-        print("Elapsed time: " + str(round(elapsed_time/60)) + " minutes")
+        difference = str(round(difference/60)) + " minutes"
 
 # Create variables for the start of Wiktionary and Wikipedia URLs as
 #   shortcuts.
@@ -272,7 +278,7 @@ Thank you. This program will produce a csv file listing {ancestor}
 path = input()
 
 # Confirm filename.
-filename = f"{lang_1}_{lang_2}_cognates.csv".lower()
+filename = f"{lang_1}-{lang_2}_cognates.csv".lower()
 print(f"""
 Thank you. By default, the file will have the following name:
     {filename}
@@ -294,45 +300,53 @@ start_time_2 = time.time()
 
 # Run functions for the first language.
 print(f"Finding category pages for {lang_1} terms derived from {ancestor}...")
-elapsed_time()
+print("Current time: " + time.ctime())
+time_diff(start_time, time.time())
+print("Elapsed time: " + difference)
 lang_1_cat_pages = [lang_1_url]
 get_wikt_cat_pages(lang_1_cat_pages)
 
 print(f"Getting entries for {lang_1} terms derived from {ancestor}...")
-elapsed_time()
+time_diff(start_time, time.time())
+print("Elapsed time: " + difference)
 lang_1_entries = []
 get_wikt_entries(lang_1,
                  lang_1_cat_pages,
                  lang_1_entries)
 
 print(f"Getting {ancestor} roots for {lang_1} terms...")
-elapsed_time()
+time_diff(start_time, time.time())
+print("Elapsed time: " + difference)
 get_ancestor_roots(lang_1,
                    ancestor,
                    lang_1_entries)
 
 # Run functions for the second language.
 print(f"Finding category pages for {lang_2} terms derived from {ancestor}...")
-elapsed_time()
+time_diff(start_time, time.time())
+print("Elapsed time: " + difference)
 lang_2_cat_pages = [lang_2_url]
 get_wikt_cat_pages(lang_2_cat_pages)
 
 print(f"Getting entries for {lang_2} terms derived from {ancestor}...")
-elapsed_time()
+time_diff(start_time, time.time())
+print("Elapsed time: " + difference)
 lang_2_entries = []
 get_wikt_entries(lang_2,
                  lang_2_cat_pages,
                  lang_2_entries)
 
 print(f"Getting {ancestor} roots for {lang_2} terms...")
-elapsed_time()
+time_diff(start_time, time.time())
+print("Elapsed time: " + difference)
 get_ancestor_roots(lang_2,
                    ancestor,
                    lang_2_entries)
 
 # Find shared roots.
 print("Finding shared roots...")
-elapsed_time()
+time_diff(start_time, time.time())
+print("Elapsed time: " + difference)
 shared_roots= []
 find_shared_roots(lang_1,
                   lang_2,
@@ -342,7 +356,8 @@ find_shared_roots(lang_1,
                   shared_roots)
 
 print("Writing the file...")
-elapsed_time()
+time_diff(start_time, time.time())
+print("Elapsed time: " + difference)
 # Change to the directory in which to save the csv.
 os.chdir(path)
 # Create a dataframe out of shared_roots.
@@ -351,35 +366,24 @@ df = pd.DataFrame(shared_roots)
 df.to_csv(filename, encoding="utf-8-sig")
 
 # Figure out how long the input process took.
-end_time = time.time()
-input_duration = round(start_time_2 - start_time)
-if input_duration < 60:
-    input_duration = str(input_duration) + " seconds"
-else:
-    input_duration = str(round(input_duration/60)) + " minutes"
+time_diff(start_time, start_time_2)
+input_duration = difference
 # Figure out how long the post-input process took.
-post_input_duration = round(end_time - start_time_2)
-if post_input_duration < 60:
-    post_input_duration = str(post_input_duration) + " seconds"
-else:
-    post_input_duration = str(round(post_input_duration/60)) + " minutes"
+time_diff(start_time_2, time.time())
+post_input_duration = difference
 # Figure out how long the program took to run in total.
-total_duration = end_time - start_time
-if total_duration < 60:
-    total_duration = str(total_duration) + " seconds"
-else:
-    total_duration = str(round(total_duration/60)) + " minutes"
+time_diff(start_time, time.time())
+total_duration = difference
 
 # Provide stats.
 cognate_pairs = str(len(shared_roots))
 lang_1_no = str(len(lang_1_entries))
 lang_2_no = str(len(lang_2_entries))
 print(f"""
-Process complete. This program found {cognate_pairs} pairs of cognates
-    between {lang_1} and {lang_2}. Overall, the program looked at
-    {lang_1_no} {lang_1} terms and {lang_2_no} {lang_2} terms and found
-    {cognate_pairs} pairs of cognates. It took {total_duration} in total
-    to run: {input_duration} to receive the input, and
+Process complete. Overall, the program looked at {lang_1_no} {lang_1}
+    terms and {lang_2_no} {lang_2} terms and found {cognate_pairs} pairs
+    of cognates between {lang_1} and {lang_2}. It took {total_duration}
+    in total to run: {input_duration} to receive the input, and
     {post_input_duration} thereafter to produce the csv file.
 
 Thank you for using this program. To close this program, please press
