@@ -6,4 +6,4 @@ _cognate\_finder.py_ was built from my earlier program, [__persian\_english\_cog
 
 The raw, uncleaned output from both programs is in the [__example\_results__ folder](https://github.com/crowtherln/cognates/tree/master/example_results 'cognates/example_results at master • crowtherln/cognates').
 
-[wiktionary\_derived\_terms\_categories.csv__](https://github.com/crowtherln/cognates/blob/master/wiktionary_derived_terms_categories.csv 'cognates/wiktionary_derived_terms_categories.csv at master • crowtherln/cognates') lists Wiktionary category pages for terms in one language derived from another. The Python script I wrote to scrape that data is not currently in this repository.
+[__wiktionary\_derived\_terms\_categories.csv__](https://github.com/crowtherln/cognates/blob/master/wiktionary_derived_terms_categories.csv 'cognates/wiktionary_derived_terms_categories.csv at master • crowtherln/cognates') lists Wiktionary category pages for terms in one language derived from another. The Python script I wrote to scrape that data is not currently in this repository.
