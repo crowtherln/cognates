@@ -4,6 +4,6 @@ I tested 15 language pairs. For each language pair, [__cognate\_finder\_results.
 
 _cognate\_finder.py_ was built from my earlier program, [__persian\_english\_cognates.py__](https://github.com/crowtherln/cognates/blob/master/persian_english_cognates.py 'cognates/persian_english_cognates.py at master • crowtherln/cognates'), which does the same thing but just for Persian and English.
 
-The raw, uncleaned output from both programs is in the [__example\_results__ folder](https://github.com/crowtherln/cognates/tree/master/example_results 'cognates/example_results at master • crowtherln/cognates').
+The raw, uncleaned output from both programs is in the [__example\_results__](https://github.com/crowtherln/cognates/tree/master/example_results 'cognates/example_results at master • crowtherln/cognates') folder.
 
 [__wiktionary\_derived\_terms\_categories.csv__](https://github.com/crowtherln/cognates/blob/master/wiktionary_derived_terms_categories.csv 'cognates/wiktionary_derived_terms_categories.csv at master • crowtherln/cognates') lists Wiktionary category pages for terms in one language derived from another. The Python script I wrote to scrape that data is not currently in this repository.
